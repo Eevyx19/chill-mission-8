@@ -18,7 +18,7 @@ createRoot(document.getElementById('root')!).render(
 
       <Route element={<MainLayout />}>
         <Route path='/' element={<HomePage />} />
-        <Route path='/create-movie' element={<MovieFormPage />} />
+        <Route path='/form-movie' element={<MovieFormPage />} />
       </Route>
     </Routes>
   </BrowserRouter>

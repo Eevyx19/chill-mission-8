@@ -65,7 +65,7 @@ export default function MovieCard(props: MovieCardProps) {
                             <div className="w-full border-b">
                                 <Button
                                     onClick={() => {
-                                        navigate("/create-movie", {
+                                        navigate("/form-movie", {
                                             state: { movie }
                                         })
                                     }}

@@ -31,7 +31,7 @@ export default function Carousel(props: CarouselProps) {
                 </Heading3>
                 {variant === "landscape" && (
                     <Button
-                        onClick={() => navigate("/create-movie")}
+                        onClick={() => navigate("/form-movie")}
                         className="w-35 flex items-center justify-center gap-2 bg-(--primary-default) hover:bg-(--primary-300) p-2 lg:p-4"
                         type="button"
                     >
