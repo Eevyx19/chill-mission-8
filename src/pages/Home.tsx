@@ -2,11 +2,13 @@ import Hero from "../component/Hero"
 import Carousel from "../component/Carousel"
 import useHome from "../hooks/useHome"
 import DeleteMovieValidation from "../component/UI/modal/DeleteMovieValidation"
+
 const HomePage = () => {
 
     const {
         movies,
-        isLoading,
+        isFetching,
+        isDeletting,
         navigate,
         handleDeleteMovie,
         countinueWatchingMovie,
@@ -15,12 +17,13 @@ const HomePage = () => {
         newReleaseMovie
     } = useHome()
 
+    
 
     return (
         <>
             <Hero
                 movie={movies[0]}
-                isLoading={isLoading}
+                isFetching={isFetching}
             />
 
             <Carousel
@@ -28,7 +31,7 @@ const HomePage = () => {
                 variant="landscape"
                 movies={countinueWatchingMovie}
                 navigate={navigate}
-                isLoading={isLoading}
+                isFetching={isFetching}
             />
 
             <Carousel
@@ -36,7 +39,7 @@ const HomePage = () => {
                 variant="potrait"
                 movies={topRatingMovie}
                 navigate={navigate}
-                isLoading={isLoading}
+                isFetching={isFetching}
             />
 
             <Carousel
@@ -44,7 +47,7 @@ const HomePage = () => {
                 variant="potrait"
                 movies={trendingMovie}
                 navigate={navigate}
-                isLoading={isLoading}
+                isFetching={isFetching}
             />
 
             <Carousel
@@ -52,12 +55,12 @@ const HomePage = () => {
                 variant="potrait"
                 movies={newReleaseMovie}
                 navigate={navigate}
-                isLoading={isLoading}
+                isFetching={isFetching}
             />
 
             <DeleteMovieValidation
                 handleDeleteMovie={handleDeleteMovie}
-                isLoading={isLoading}
+                isDeletting={isDeletting}
             />
         </>
     )

@@ -29,6 +29,13 @@ export default function MovieCard(props: MovieCardProps) {
     const { movie, handleMouseHover, handleMouseLeave, cancelPreview, variant, navigate } = props
 
     const isLandscape = variant === "landscape"
+
+    const imageSrc = isLandscape
+        ? movie.backdrop_image
+        : movie.poster_image
+
+    const isImageBroken = !imageSrc
+
     return (
         <li>
             <article
@@ -41,7 +48,7 @@ export default function MovieCard(props: MovieCardProps) {
                     {movie.is_new_episode && <NewEpsBadge isLandscape={isLandscape} />}
                     {movie.is_top && <TopBadge isLandscape={isLandscape} />}
                     <img
-                        src={isLandscape ? movie.backdrop_image : movie.poster_image}
+                        src={isImageBroken ? "https://placehold.co/300x450" : imageSrc}
                         alt={`Poster ${movie.title}`}
                         className="h-full w-full object-cover"
                     />

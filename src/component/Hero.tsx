@@ -9,16 +9,16 @@ import SKeletonHeroLoader from "./UI/loading/SkeletonHeroLoader"
 
 interface HeroProps {
     movie: ResponseMovie
-    isLoading: boolean
+    isFetching: boolean
 }
 
 export default function Hero(props: HeroProps) {
 
-    const { movie, isLoading } = props
+    const { movie, isFetching } = props
 
     return (
         <>
-            {isLoading ? (
+            {isFetching ? (
                 <SKeletonHeroLoader />
             ) : movie ? (
                 <section className="w-full h-56 sm:h-85 md:h-120 lg:h-155 px-5 sm:px-10 md:px-15 lg:px-20 py-10 sm:py-12 md:py-16 lg:py-20 bg-no-repeat bg-center bg-cover flex flex-col gap-3 sm:gap-5 md:gap-7 lg:gap-10 justify-end"

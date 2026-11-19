@@ -1,16 +1,19 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router"
-import { createMovie, updateMovie } from "../services/api/movies.service"
 import { uploadImage } from "../services/cloudinary.service"
 import type { ResponseMovie } from "../types/response-movie.types"
 import type { CategoryType, FormMovies, GenreType, ImagesForm, MovieProps } from "../types/movie-form.types"
 import { categoryList, genreList } from "../component/data/MovieForm"
+import { useMovieStore } from "../store/useMovieStore"
 
 
 export default function useMovieForm({ movie }: MovieProps = {}) {
-    console.log(movie)
+
+    const addMovie = useMovieStore((state) => state.addMovie)
+    const editMovie = useMovieStore((state) => state.editMovie)
+
     const navigate = useNavigate()
-    const [isLoading, setIsLoading] = useState<boolean>(false)
+    const [isSubmitting, setIsSubmitting] = useState<boolean>(false)
 
     //Form Information Movie
     const [formMovies, setFormMovies] = useState<FormMovies>({
@@ -82,7 +85,6 @@ export default function useMovieForm({ movie }: MovieProps = {}) {
                 preview: movie.backdrop_image
             }
         })
-
     }, [movie])
 
     //Add Genre
@@ -170,7 +172,7 @@ export default function useMovieForm({ movie }: MovieProps = {}) {
             formMovies.title.trim() === "" ||
             formMovies.description.trim() === "" ||
             formMovies.film_maker.trim() === "" ||
-            formMovies.rating === "" || 
+            formMovies.rating === "" ||
             formMovies.age === "" ||
             selectedGenres.length < 1 ||
             selectedCategory.length < 1
@@ -180,7 +182,7 @@ export default function useMovieForm({ movie }: MovieProps = {}) {
         }
 
         try {
-            setIsLoading(true)
+            setIsSubmitting(true)
             const [posterUrl, backdropUrl] = await Promise.all([
                 poster.file
                     ? uploadImage(poster.file, "poster")
@@ -207,22 +209,23 @@ export default function useMovieForm({ movie }: MovieProps = {}) {
             }
 
             if (movie) {
-                await updateMovie(movie.id, payload)
+                await editMovie(movie.id, payload)
             } else {
-                await createMovie(payload)
+                await addMovie(payload)
             }
 
             navigate("/")
+
         } catch (error) {
             console.error("Gagal membuat movie:", error)
         } finally {
-            setIsLoading(false)
+            setIsSubmitting(false)
         }
     }
 
     return {
         navigate,
-        isLoading,
+        isSubmitting,
         formMovies,
         genre,
         setGenre,

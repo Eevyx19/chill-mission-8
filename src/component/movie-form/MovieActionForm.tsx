@@ -5,11 +5,11 @@ import type { NavigateFunction } from "react-router";
 interface MovieActionProps {
     navigate: NavigateFunction;
     movie?: ResponseMovie | null;
-    isLoading: boolean
+    isSubmitting: boolean
 }
 
 export default function MovieActionForm(props: MovieActionProps) {
-    const { navigate, movie, isLoading } = props
+    const { navigate, movie, isSubmitting } = props
     return (
         <section className="flex flex-col-reverse gap-3 border-t border-(--outline-border) pt-6 sm:flex-row sm:justify-end md:pt-8">
             <Button
@@ -20,10 +20,10 @@ export default function MovieActionForm(props: MovieActionProps) {
                 Batal
             </Button>
             <Button
-                className={`${isLoading ? "bg-(--info-background) cursor-not-allowed" : "bg-(--primary-default) text-(--primary-text)"} px-5 py-3 font-semibold sm:min-w-40`}
+                className={`${isSubmitting ? "bg-(--info-background) cursor-not-allowed" : "bg-(--primary-default) text-(--primary-text)"} px-5 py-3 font-semibold sm:min-w-40`}
                 type="submit"
             >
-                {isLoading ? "Submitting..." : movie ? "Edit Movie" : "Buat Movie"}
+                {isSubmitting ? "Submitting..." : movie ? "Edit Movie" : "Buat Movie"}
             </Button>
         </section>
 

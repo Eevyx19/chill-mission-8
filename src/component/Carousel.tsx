@@ -14,14 +14,14 @@ interface CarouselProps {
     movies: ResponseMovie[];
     variant: "landscape" | "potrait";
     navigate: NavigateFunction;
-    isLoading: boolean;
+    isFetching: boolean;
 }
 
 export default function Carousel(props: CarouselProps) {
     const { preview, clearTimer, handleMouseHover, handleMouseLeave, cancelPreview } = useCarousel()
 
 
-    const { title, movies, variant, navigate, isLoading } = props
+    const { title, movies, variant, navigate, isFetching } = props
 
     return (
         <section className="relative px-5 md:px-10 lg:px-20 py-5 md:py-7.5 lg:py-10 flex flex-col gap-5 md:gap-7 lg:gap-8">
@@ -40,7 +40,7 @@ export default function Carousel(props: CarouselProps) {
                     </Button>
                 )}
             </header>
-            {isLoading ? (
+            {isFetching ? (
                 <SkeletonCardLoader
                     cards={6}
                     variant={variant}

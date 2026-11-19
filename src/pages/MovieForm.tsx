@@ -18,7 +18,7 @@ const MovieFormPage = () => {
 
     const {
         navigate,
-        isLoading,
+        isSubmitting,
         formMovies,
         genre,
         setGenre,
@@ -87,7 +87,7 @@ const MovieFormPage = () => {
                     <MovieActionForm
                         navigate={navigate}
                         movie={movie}
-                        isLoading={isLoading}
+                        isSubmitting={isSubmitting}
                     />
 
                 </form>

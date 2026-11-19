@@ -5,12 +5,12 @@ import { useModalStore } from "../../../store/useModalStore";
 
 interface DeleteMovieProps {
     handleDeleteMovie: (id: string) => Promise<void>;
-    isLoading: boolean;
+    isDeletting: boolean;
 }
 
 
 export default function DeleteMovieValidation(props: DeleteMovieProps) {
-    const { handleDeleteMovie, isLoading } = props
+    const { handleDeleteMovie, isDeletting } = props
     const { closeModal, movieId } = useModalStore()
 
     if (!movieId) return
@@ -39,10 +39,10 @@ export default function DeleteMovieValidation(props: DeleteMovieProps) {
 
                     <Button
                         onClick={() => handleDeleteMovie(movieId)}
-                        className={`${isLoading ? "bg-(--info-background)" : "bg-(--error-default) hover:bg-(--error-pressed)"} w-full p-2`}
+                        className={`${isDeletting ? "bg-(--info-background)" : "bg-(--error-default) hover:bg-(--error-pressed)"} w-full p-2`}
                         type="button"
                     >
-                        {isLoading ? "Menghapus..." : "Ya, Hapus"}
+                        {isDeletting ? "Menghapus..." : "Ya, Hapus"}
                     </Button>
                 </div>
             </div>
